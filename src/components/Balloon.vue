@@ -14,7 +14,7 @@ export default {
   name: "Balloon",
   data() {
     return {
-      colors: ["#DCEED1", "#A18276", "#E80C7A", "#FF530D", "#FF0DFF", "#00EAFF", "#A8FF0D", "#FFF200"],
+      colors: ["#343735", "#E6E7E8", "#EF5D52", "#008DA8", "#008DA8", "#54B848", "#54B848", ],
       chosenColor: false,
       randSpeed: false,
       randLeft: false,
@@ -24,7 +24,7 @@ export default {
   mounted() {
     this.randSpeed = Math.random() * 6 + 1;
     this.randDelay = Math.random() * 3 + 1;
-    this.randLeft = Math.floor(Math.random() * 87) + 0;
+    this.randLeft = Math.floor(Math.random() * 95) + (-5);
     this.chosenColor = this.colors[Math.floor(Math.random() * this.colors.length)];
   },
   methods : {
@@ -44,11 +44,16 @@ export default {
   position: absolute;
   animation-name: moveBalloon;
   animation-fill-mode: forwards;
+  /* animation-iteration-count: infinite; */
   z-index: 1000;
 }
 @keyframes moveBalloon {
-  from {top: 100vh;}
-  to {top: -50vh;}
+  0% {
+    top: 100vh;
+  }
+  100% {
+    top: -50vh;
+  }
 }
 .balloon {
     display: inline-block;
@@ -80,4 +85,15 @@ export default {
       content: "";
       background: rgba(0, 0, 0, 0.2);
     z-index: -120}
+    @media (max-width: 946px) {
+      .balloon {
+        height: 100px;
+        width: 85px;
+        margin-left: 0;
+      }
+
+      .balloon:after {
+        display: none;
+      }
+    }
 </style>
