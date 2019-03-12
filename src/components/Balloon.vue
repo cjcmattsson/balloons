@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="balloon-wrapper"
+  <div v-bind:class="[this.ribbonCut ? 'animate-balloon' : '', 'balloon-wrapper']"
   @click="explode"
   v-bind:style="{
     left: randLeft ? randLeft+'vw' : '',
@@ -11,6 +11,7 @@
 
 <script>
 export default {
+  props: ['ribbonCut'],
   name: "Balloon",
   data() {
     return {
@@ -18,12 +19,13 @@ export default {
       chosenColor: false,
       randSpeed: false,
       randLeft: false,
+      test: false,
       randDelay: false
     }
   },
   mounted() {
     this.randSpeed = Math.random() * 6 + 1;
-    this.randDelay = Math.random() * 3 + 1;
+    this.randDelay = Math.random() * 2 + 0;
     this.randLeft = Math.floor(Math.random() * 95) + (-5);
     this.chosenColor = this.colors[Math.floor(Math.random() * this.colors.length)];
   },
@@ -42,10 +44,12 @@ export default {
   height: auto;
   width: auto;
   position: absolute;
-  animation-name: moveBalloon;
-  animation-fill-mode: forwards;
   /* animation-iteration-count: infinite; */
   z-index: 1000;
+}
+.animate-balloon {
+  animation-name: moveBalloon;
+  animation-fill-mode: forwards;
 }
 @keyframes moveBalloon {
   0% {
@@ -75,16 +79,6 @@ export default {
       position: absolute;
       bottom: -12px;
       z-index: -100; }
-    .balloon:after {
-      display: inline-block;
-      top: 140px;
-      position: absolute;
-      height: 150px;
-      width: 1px;
-      margin: 0 auto;
-      content: "";
-      background: rgba(0, 0, 0, 0.2);
-    z-index: -120}
     @media (max-width: 946px) {
       .balloon {
         height: 100px;

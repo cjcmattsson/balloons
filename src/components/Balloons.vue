@@ -1,10 +1,12 @@
 <template lang="html">
   <div class="all-balloons">
     <div class="close" @click="close">x</div>
-    <Balloon v-for="balloon in number"></Balloon>
-    <div class="message-wrapper">
+    <Balloon v-for="balloon in number" v-bind:ribbonCut="ribbonCut"></Balloon>
+    <img v-if="removeBanner" src="./banner.gif" alt="">
+    <img v-if="!cutBanner" src="./banner.png" alt="" @click="cutRibbon">
+    <!-- <div class="message-wrapper" @click="cutRibbon">
       <Message></Message>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -19,18 +21,37 @@ export default {
   data() {
     return {
       number: 50,
+      ribbonCut: false,
+      cutBanner: false,
+      removeBanner: false
     }
   },
   methods: {
     close() {
-      console.log("HERROIEJ")
       document.querySelector('.all-balloons').style.display = "none";
+    },
+    cutRibbon() {
+      this.ribbonCut = true;
+      this.removeBanner = true;
+      this.cutBanner = true;
+      setTimeout(() => {
+        this.removeBanner = false;
+      }, 1000)
     }
   }
 }
 </script>
 
 <style lang="css" scoped>
+img {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+  width: auto;
+  height: auto;
+}
   .message-wrapper {
     position: absolute;
     text-align: left;
@@ -42,6 +63,7 @@ export default {
     z-index: 1000;
   }
   .all-balloons {
+    overflow: hidden;
     background-color: rgba(247, 187, 205, 0.2);
     position: fixed;
     height: 100vh;

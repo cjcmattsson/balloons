@@ -1,14 +1,17 @@
 <template lang="html">
-    <a href="google.com" class="border">
+    <div href="google.com" class="border">
       <div class="message">
         <h1>Hurra!</h1>
         <h3>Vi öppnar vår 200:e butik! Det firar vi med massa goa priser under mars månad!</h3>
       </div>
-    </a>
+    </div>
 </template>
 
 <script>
 export default {
+  methods: {
+    
+  }
 }
 </script>
 
